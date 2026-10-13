@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827"><title>NutriTrack — التغذية</title>
+<style>
+:root{--bg:#0b1220;--panel:#121c2d;--panel2:#172338;--line:#26364e;--text:#f3f6fb;--muted:#9aabc2;--green:#a3e635;--blue:#60a5fa;--orange:#fb923c;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#14243b 0,#0b1220 55%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;background:var(--green);color:#14200b;font-weight:800}button.secondary{background:#23324a;color:var(--text);border:1px solid var(--line)}button.danger{background:#442332;color:#fecdd3}.wrap{max-width:1100px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0 22px}.brand{display:flex;gap:12px;align-items:center}.logo{background:var(--green);color:#17230a;border-radius:15px;width:48px;height:48px;display:grid;place-items:center;font-size:25px;font-weight:900}.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{border:1px solid #40516a;color:#dce8f8;padding:8px 12px;border-radius:999px;font-size:13px}.tabs{display:flex;gap:8px;overflow:auto;padding:0 0 16px}.tab{white-space:nowrap;background:#172338;color:#bac8da;border:1px solid var(--line)}.tab.active{background:var(--green);color:#17230a;border-color:var(--green)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:linear-gradient(145deg,rgba(23,35,56,.97),rgba(16,27,44,.97));border:1px solid var(--line);border-radius:20px;padding:18px;min-width:0}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}.card h2{font-size:17px;margin:0 0 15px}.muted{color:var(--muted)}.big{font-size:36px;font-weight:900;letter-spacing:-1px}.unit{font-size:13px;color:var(--muted);font-weight:500}.progress{height:9px;background:#28384f;border-radius:99px;overflow:hidden;margin:12px 0}.progress span{height:100%;display:block;background:var(--green);border-radius:99px;transition:width .2s}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#101a2a;border:1px solid #24334a;border-radius:14px;padding:12px}.stat strong{display:block;font-size:20px}.stat small{color:var(--muted)}.macro{display:flex;align-items:center;gap:8px;margin:12px 0}.macro label{width:58px;color:var(--muted);font-size:13px}.macro .progress{flex:1;margin:0}.macro b{font-size:12px;min-width:70px;text-align:left}.row{display:flex;gap:9px;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:115px}.field label{font-size:12px;color:var(--muted)}input,select{width:100%;background:#0d1727;border:1px solid #30415b;color:var(--text);border-radius:11px;padding:11px;outline:none}input:focus,select:focus{border-color:var(--green)}.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.form .wide{grid-column:1/-1}.foodrow,.itemrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #26364a}.foodrow:last-child,.itemrow:last-child{border:0}.foodrow strong,.itemrow strong{display:block;font-size:14px}.foodrow small,.itemrow small{color:var(--muted)}.foodrow .actions{display:flex;align-items:center;gap:8px}.foodrow button{padding:7px 10px}.empty{color:var(--muted);text-align:center;padding:22px 8px}.section{display:none}.section.active{display:block}.hint{font-size:12px;line-height:1.7;color:var(--muted)}.notice{border:1px solid #455d34;background:#1b2a1a;color:#d9f99d;padding:12px;border-radius:13px;font-size:13px;line-height:1.7;margin-bottom:14px}.badge{font-size:11px;padding:4px 8px;border-radius:99px;background:#23364a;color:#c6d8ef}.chart{height:140px;display:flex;align-items:end;gap:8px;padding:12px 2px 0}.barwrap{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:6px}.bar{width:min(28px,80%);background:var(--blue);border-radius:7px 7px 2px 2px;min-height:3px}.barwrap small{font-size:10px;color:var(--muted)}.footer{text-align:center;color:#71829a;font-size:11px;padding:22px}.hide{display:none!important}@media(max-width:700px){.span8,.span4,.span6{grid-column:span 12}.wrap{padding:12px}.card{padding:15px}.big{font-size:31px}.stats{gap:6px}.stat{padding:10px}.stat strong{font-size:17px}.brand h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">F</div><div><h1>NutriTrack <span style="color:var(--green)">التغذية</span></h1><p>تابع أكلك وسعراتك وماكروزك ووزنك</p></div></div><div class="pill">🎯 هدفك اليومي: <b id="targetBadge">2050</b> سعرة</div></header>
+<nav class="tabs">
+<button class="tab active" data-tab="home">🏠 الرئيسية</button><button class="tab" data-tab="food">🍽️ الأكل والسعرات</button><button class="tab" data-tab="weight">⚖️ الوزن</button><button class="tab" data-tab="settings">⚙️ الإعدادات</button>
+</nav>
+<section id="home" class="section active">
+<div class="notice">أهلًا بيك! هدف السعرات مضبوط مبدئيًا على <b>2050 سعرة يوميًا</b>. بياناتك محفوظة على نفس الجهاز والمتصفح.</div>
+<div class="grid">
+<div class="card span8"><h2>ملخص اليوم <span class="badge" id="todayLabel"></span></h2><div class="row" style="align-items:center"><div style="flex:1"><div class="big"><span id="consumed">0</span> <span class="unit">/ <span id="targetNum">2050</span> سعرة</span></div><p class="muted" style="margin:4px 0" id="remaining">متبقي 2050 سعرة</p></div><div style="font-size:48px">🥗</div></div><div class="progress"><span id="calBar" style="width:0%"></span></div><div class="stats"><div class="stat"><strong id="protein">0 g</strong><small>بروتين</small></div><div class="stat"><strong id="carbs">0 g</strong><small>كارب</small></div><div class="stat"><strong id="fat">0 g</strong><small>دهون</small></div></div></div>
+<div class="card span4"><h2>هدفك اليوم</h2><div class="big" id="goalPct">0%</div><p class="muted">من هدف السعرات اليومي</p><div class="macro"><label>بروتين</label><div class="progress"><span id="pBar" style="width:0%;background:var(--blue)"></span></div><b id="pText">0 / 165g</b></div><div class="macro"><label>كارب</label><div class="progress"><span id="cBar" style="width:0%;background:var(--orange)"></span></div><b id="cText">0 / 230g</b></div><div class="macro"><label>دهون</label><div class="progress"><span id="fBar" style="width:0%;background:var(--red)"></span></div><b id="fText">0 / 65g</b></div></div>
+<div class="card span6"><h2>آخر الوجبات</h2><div id="recentMeals" class="empty">لسه مفيش وجبات مسجلة النهارده.</div><button class="secondary" onclick="go('food')">+ سجّل وجبة</button></div>
+<div class="card span6"><h2>آخر وزن مسجل</h2><div class="big"><span id="lastWeight">—</span> <span class="unit">كجم</span></div><p class="muted" id="weightDate">سجّل وزنك لمتابعة التقدم</p><button class="secondary" onclick="go('weight')">متابعة الوزن</button></div>
+</div></section>
+<section id="food" class="section"><div class="grid">
+<div class="card span6"><h2>➕ أضف أكلك</h2><div class="field" style="margin-bottom:12px"><label>دور على أكلة مصرية أو اختار من القائمة</label><input id="foodSearch" placeholder="مثال: عيش بلدي، جبنة قريش، رز..." oninput="renderFoods()"></div><div id="foodList"></div><p class="hint">القيم تقريبية لكل 100 جم، وقد تختلف حسب النوع وطريقة الطبخ.</p></div>
+<div class="card span6"><h2>✨ احسب وجبتك بالذكاء الاصطناعي</h2><div id="aiStatus" class="hint">حالة الاتصال: جاري التحقق…</div>
+<p class="muted" style="font-size:13px;line-height:1.8;margin-top:-5px">اكتب الأكل والكمية، مثل: <b>200 جرام رز و150 جرام فراخ مشوية</b>. سيحاول التطبيق مطابقة الأطعمة الموجودة في قاعدة البيانات وحساب القيم التقريبية.</p>
+<form id="textMealForm">
+<div class="field"><label>اكتب الوجبة</label><textarea id="mealText" rows="3" required placeholder="مثال: 200 جرام رز أبيض مطبوخ و150 جرام صدر فراخ مشوي" style="width:100%;resize:vertical;background:#0d1727;border:1px solid #30415b;color:var(--text);border-radius:11px;padding:11px;font:inherit"></textarea></div>
+<div class="row" style="margin-top:10px;align-items:end"><div class="field"><label>نوع الوجبة</label><select id="textMealType"><option>غداء</option><option>فطار</option><option>عشاء</option><option>سناك</option><option>قبل التمرين</option></select></div><button type="submit">احسب الوجبة</button></div>
+</form><div id="parseResult" style="margin-top:12px"></div>
+<p class="hint">التحليل الذكي يحتاج تشغيل الخادم وإعداد مفتاح API بشكل آمن. النتائج تقديرية وقد تختلف حسب الوزن الفعلي والوصفة والزيت/السمن.</p></div>
+<div class="card span6"><h2>تسجيل وجبة يدويًا</h2><form id="customForm" class="form"><div class="field wide"><label>اسم الأكل</label><input id="customName" required placeholder="مثال: مكرونة بالبشاميل"></div><div class="field"><label>الكمية (جرام)</label><input id="customGrams" type="number" min="1" value="100" required></div><div class="field"><label>السعرات للكمية كلها</label><input id="customCal" type="number" min="0" required placeholder="مثال: 250"></div><div class="field"><label>البروتين (جم)</label><input id="customP" type="number" min="0" value="0"></div><div class="field"><label>الكارب (جم)</label><input id="customC" type="number" min="0" value="0"></div><div class="field"><label>الدهون (جم)</label><input id="customF" type="number" min="0" value="0"></div><div class="field"><label>نوع الوجبة</label><select id="mealType"><option>فطار</option><option>غداء</option><option>عشاء</option><option>سناك</option><option>قبل التمرين</option></select></div><button class="wide" type="submit">حفظ الوجبة</button></form></div>
+<div class="card span12"><h2>وجبات اليوم</h2><div id="mealList" class="empty">مفيش وجبات لسه.</div><button class="danger" onclick="clearMeals()">مسح وجبات اليوم</button></div>
+</div></section>
+<section id="weight" class="section"><div class="grid"><div class="card span4"><h2>تسجيل الوزن</h2><form id="weightForm" class="form"><div class="field wide"><label>الوزن بالكيلوجرام</label><input id="weightInput" type="number" min="1" max="500" step=".1" required placeholder="مثال: 104"></div><div class="field wide"><label>نسبة الدهون % (اختياري)</label><input id="fatInput" type="number" min="1" max="70" step=".1" placeholder="لو تعرفها"></div><button class="wide">حفظ الوزن</button></form><p class="hint">الأفضل تقيس في نفس اليوم والوقت تقريبًا كل أسبوع.</p></div><div class="card span8"><h2>تطور الوزن</h2><div id="weightChart" class="chart"></div><div id="weightHistory"></div></div></div></section>
+<section id="settings" class="section"><div class="grid"><div class="card span6"><h2>🎯 أهدافك</h2><form id="settingsForm" class="form"><div class="field wide"><label>هدف السعرات اليومي</label><input id="targetInput" type="number" min="1000" max="6000" value="2050" required></div><div class="field"><label>هدف البروتين (جم)</label><input id="proteinTarget" type="number" min="0" value="165"></div><div class="field"><label>هدف الكارب (جم)</label><input id="carbTarget" type="number" min="0" value="230"></div><div class="field"><label>هدف الدهون (جم)</label><input id="fatTarget" type="number" min="0" value="65"></div><button class="wide">حفظ الأهداف</button></form></div><div class="card span6"><h2>⏰ تذكير يومي</h2><p class="muted">فعّل الإشعارات لتذكيرك بتسجيل أكلك. لازم تسمح بالإشعارات، وقد لا يعمل التذكير إذا كان المتصفح مقفولًا.</p><div class="row"><div class="field"><label>الوقت</label><input id="reminderTime" type="time" value="07:30"></div><button onclick="enableReminder()">تفعيل التذكير</button></div><p id="reminderStatus" class="hint">التذكير غير مفعّل.</p><hr style="border-color:var(--line);margin:18px 0"><h2>بياناتك</h2><p class="hint">البيانات محفوظة محليًا في المتصفح على هذا الجهاز. مسح بيانات المتصفح قد يحذفها.</p><button class="danger" onclick="resetAll()">مسح كل بيانات التطبيق</button></div></div></section>
+<div class="footer">NutriTrack • نسخة تجريبية للتغذية • ليست بديلًا عن استشارة أخصائي تغذية</div>
+</div>
+<script>
+const DB=[
+["عيش بلدي",275,9,55,2],["عيش أبيض",265,9,49,3.2],["جبنة قريش",98,11,3.4,4.3],["جبنة دومتي",350,16,3,30],["بيض مسلوق",155,13,1.1,11],["صدر فراخ مشوي",165,31,0,3.6],["فراخ مشوية بالجلد",220,27,0,12],["سمك بلطي مشوي",128,26,0,2.7],["رز أبيض مطبوخ",130,2.7,28,0.3],["مكرونة مسلوقة",157,5.8,31,0.9],["بطاطس مشوية",93,2.5,21,0.1],["فول مدمس",110,7.6,19.7,0.4],["عدس مطبوخ",116,9,20,0.4],["زبادي",61,3.5,4.7,3.3],["لبن كامل الدسم",61,3.2,4.8,3.3],["تفاح",52,0.3,14,0.2],["موز",89,1.1,22.8,0.3],["جوافة",68,2.6,14.3,1],["تمر",282,2.5,75,0.4],["عسل نحل",304,0.3,82,0],["شوفان",389,16.9,66.3,6.9],["تونة بالماء مصفاة",116,26,0,1],["لحم بقري قليل الدهن",217,26,0,12],["بامية مطبوخة",65,2,8,3],["كشري مصري",150,5,27,2],["بطاطس محمرة",312,3.4,41,15],["فشار بدون زيت",387,13,78,4.5],["برتقال",47,0.9,11.8,0.1]
+];
+const today=()=>new Date().toISOString().slice(0,10);
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem("fit_"+k))??d}catch{return d}};
+const set=(k,v)=>localStorage.setItem("fit_"+k,JSON.stringify(v));
+let meals=get("meals",{}), weights=get("weights",[]), settings=get("settings",{cal:2050,p:165,c:230,f:65});
+function dayMeals(){return meals[today()]||[]}
+function saveMeals(a){meals[today()]=a;set("meals",meals);renderAll()}
+function go(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===id));if(id==="food")renderFoods();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+function totals(){return dayMeals().reduce((a,m)=>({cal:a.cal+m.cal,p:a.p+m.p,c:a.c+m.c,f:a.f+m.f}),{cal:0,p:0,c:0,f:0})}
+function pct(n,d){return Math.min(100,d?Math.round(n/d*100):0)}
+function renderHome(){let t=totals(),left=settings.cal-t.cal;document.getElementById("todayLabel").textContent=new Date().toLocaleDateString("ar-EG",{day:"numeric",month:"short"});document.getElementById("targetBadge").textContent=settings.cal;document.getElementById("targetNum").textContent=settings.cal;document.getElementById("consumed").textContent=Math.round(t.cal);document.getElementById("remaining").textContent=left>=0?`متبقي ${Math.round(left)} سعرة`:`زائد ${Math.round(-left)} سعرة عن الهدف`;document.getElementById("calBar").style.width=pct(t.cal,settings.cal)+"%";document.getElementById("goalPct").textContent=pct(t.cal,settings.cal)+"%";["protein","carbs","fat"].forEach((id,i)=>document.getElementById(id).textContent=Math.round([t.p,t.c,t.f][i])+" g");[["p",t.p,settings.p],["c",t.c,settings.c],["f",t.f,settings.f]].forEach(([id,n,d])=>{document.getElementById(id+"Bar").style.width=pct(n,d)+"%";document.getElementById(id+"Text").textContent=Math.round(n)+" / "+d+"g"});let a=dayMeals().slice(-3).reverse();document.getElementById("recentMeals").innerHTML=a.length?a.map(m=>`<div class="itemrow"><div><strong>${esc(m.name)}</strong><small>${esc(m.type||"وجبة")} • ${m.grams||""} جم</small></div><b>${Math.round(m.cal)} سعرة</b></div>`).join(""):'<div class="empty">لسه مفيش وجبات مسجلة النهارده.</div>';let w=weights.at(-1);document.getElementById("lastWeight").textContent=w?w.kg:"—";document.getElementById("weightDate").textContent=w?`آخر تسجيل: ${w.date}${w.fat?` • دهون ${w.fat}%`:""}`:"سجّل وزنك لمتابعة التقدم"}
+function renderFoods(){let q=(document.getElementById("foodSearch").value||"").trim().toLowerCase();let list=DB.filter(x=>x[0].toLowerCase().includes(q));document.getElementById("foodList").innerHTML=list.length?list.map((f,i)=>`<div class="foodrow"><div><strong>${f[0]}</strong><small>${f[1]} سعرة • P ${f[2]}g • C ${f[3]}g • F ${f[4]}g / 100 جم</small></div><div class="actions"><input aria-label="الجرامات" id="grams${DB.indexOf(f)}" type="number" min="1" value="100" style="width:72px;padding:7px"><button onclick="addFood(${DB.indexOf(f)})">+</button></div></div>`).join(""):'<div class="empty">مفيش نتيجة. سجّلها يدويًا من النموذج.</div>'}
+function addFood(i){let f=DB[i],g=Number(document.getElementById("grams"+i).value)||100;let type=prompt("نوع الوجبة؟ اكتب فطار أو غداء أو عشاء أو سناك","غداء")||"وجبة";let m={name:f[0],grams:g,cal:f[1]*g/100,p:f[2]*g/100,c:f[3]*g/100,f:f[4]*g/100,type};saveMeals([...dayMeals(),m]);go("food")}
+function renderMeals(){let a=dayMeals();document.getElementById("mealList").innerHTML=a.length?a.map((m,i)=>`<div class="foodrow"><div><strong>${esc(m.name)} <span class="badge">${esc(m.type||"وجبة")}</span></strong><small>${m.grams||"—"} جم • بروتين ${Math.round(m.p)}g • كارب ${Math.round(m.c)}g • دهون ${Math.round(m.f)}g</small></div><div class="actions"><b>${Math.round(m.cal)} سعرة</b><button class="danger" onclick="removeMeal(${i})">حذف</button></div></div>`).join(""):'<div class="empty">مفيش وجبات لسه. اختار أكلة من القائمة أو سجّلها يدويًا.</div>'}
+function removeMeal(i){let a=dayMeals();a.splice(i,1);saveMeals(a)}
+function clearMeals(){if(confirm("تمسح كل وجبات النهارده؟"))saveMeals([])}
+document.getElementById("customForm").onsubmit=e=>{e.preventDefault();let m={name:document.getElementById("customName").value,grams:+document.getElementById("customGrams").value,cal:+document.getElementById("customCal").value,p:+document.getElementById("customP").value||0,c:+document.getElementById("customC").value||0,f:+document.getElementById("customF").value||0,type:document.getElementById("mealType").value};saveMeals([...dayMeals(),m]);e.target.reset();document.getElementById("customGrams").value=100;document.getElementById("customP").value=0;document.getElementById("customC").value=0;document.getElementById("customF").value=0};
+document.getElementById("weightForm").onsubmit=e=>{e.preventDefault();weights.push({kg:+document.getElementById("weightInput").value,fat:+document.getElementById("fatInput").value||null,date:today()});set("weights",weights);e.target.reset();renderAll();alert("تم حفظ الوزن")};
+function renderWeights(){let a=weights.slice(-8);let max=Math.max(...a.map(x=>x.kg),1),min=Math.min(...a.map(x=>x.kg),0);document.getElementById("weightChart").innerHTML=a.length?a.map(w=>`<div class="barwrap"><b style="font-size:10px">${w.kg}</b><div class="bar" style="height:${Math.max(6,((w.kg-min)/(max-min||1))*85+15)}px"></div><small>${w.date.slice(5)}</small></div>`).join(""):'<div class="empty">سجّل أول وزن عشان يظهر الرسم البياني.</div>';document.getElementById("weightHistory").innerHTML=weights.slice().reverse().map((w,i)=>`<div class="itemrow"><div><strong>${w.kg} كجم ${w.fat?`• دهون ${w.fat}%`:""}</strong><small>${w.date}</small></div><button class="danger" onclick="deleteWeight(${weights.length-1-i})">حذف</button></div>`).join("")}
+function deleteWeight(i){weights.splice(i,1);set("weights",weights);renderAll()}
+document.getElementById("settingsForm").onsubmit=e=>{e.preventDefault();settings={cal:+document.getElementById("targetInput").value,p:+document.getElementById("proteinTarget").value,c:+document.getElementById("carbTarget").value,f:+document.getElementById("fatTarget").value};set("settings",settings);renderAll();alert("تم حفظ الأهداف")};
+function enableReminder(){let time=document.getElementById("reminderTime").value||"07:30";set("reminder",time);if(!("Notification"in window)){document.getElementById("reminderStatus").textContent="المتصفح لا يدعم إشعارات الويب.";return}Notification.requestPermission().then(p=>{document.getElementById("reminderStatus").textContent=p==="granted"?`تم ضبط التذكير على ${time}. افتح التطبيق في هذا الوقت حتى يستطيع فحص الموعد؛ التذكير قد لا يعمل بعد إغلاق المتصفح.`:"لم يتم السماح بالإشعارات. يمكنك تفعيلها من إعدادات المتصفح."})}
+function checkReminder(){let time=get("reminder",null);if(!time||!("Notification"in window)||Notification.permission!=="granted")return;let now=new Date(),key=today()+"_"+time;if(now.getHours()===+time.split(":")[0]&&now.getMinutes()===+time.split(":")[1]&&get("lastReminder","")!==key){new Notification("FitTrack — تذكير يومي",{body:"هدفك اليومي 2050 سعرة. سجّل وجباتك وابدأ يومك 💪"});set("lastReminder",key)}}
+function resetAll(){if(confirm("متأكد؟ سيتم حذف الوجبات والأوزان والتمارين والأهداف المحفوظة.")){["meals","weights","settings","reminder","lastReminder"].forEach(k=>localStorage.removeItem("fit_"+k));location.reload()}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function parseMealText(raw){
+ const text=raw.toLowerCase().replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/٫/g,".").replace(/,/g," ");
+ const unitRe=/(?:كجم|كيلو(?:جرام)?|kg|جم|جرام|غرام|g)\s*/g;
+ let matches=[];
+ // Find each food name, then infer quantity from the closest preceding number/unit.
+ for(const f of DB){
+   const name=f[0].toLowerCase();
+   let idx=text.indexOf(name);
+   if(idx<0) continue;
+   let before=text.slice(Math.max(0,idx-35),idx);
+   let nums=[...before.matchAll(/(\d+(?:\.\d+)?)/g)];
+   let grams=100;
+   if(nums.length){
+     const last=nums[nums.length-1], tail=before.slice(last.index+last[0].length);
+     const unit=tail.match(/(كجم|كيلو(?:جرام)?|kg|جم|جرام|غرام|g)\s*$/i);
+     if(unit){grams=+last[0];if(/^(كجم|كيلو|كيلوجرام|kg)$/i.test(unit[1]))grams*=1000;}
+     else if(!tail.trim() || /(?:وزن|كمية|حوالي|تقريبًا)\s*$/.test(tail)) grams=+last[0];
+   }
+   matches.push({f,grams:Math.max(1,grams),idx});
+ }
+ // Handle common word variants when the database name isn't written exactly.
+ const aliases=[
+  {terms:["عيش","رغيف عيش","خبز بلدي"],name:"عيش بلدي",grams:60},
+  {terms:["رز","أرز"],name:"رز أبيض مطبوخ",grams:100},
+  {terms:["فراخ","دجاج"],name:"صدر فراخ مشوي",grams:100},
+  {terms:["سمك بلطي","بلطي"],name:"سمك بلطي مشوي",grams:100},
+  {terms:["بطاطس"],name:"بطاطس مشوية",grams:100},
+  {terms:["جبنة قريش"],name:"جبنة قريش",grams:100},
+  {terms:["بيضه","بيضة","بيض"],name:"بيض مسلوق",grams:50},
+  {terms:["موزة","موز"],name:"موز",grams:100},
+  {terms:["تفاحة","تفاح"],name:"تفاح",grams:100},
+  {terms:["فول"],name:"فول مدمس",grams:100},
+  {terms:["لبن"],name:"لبن كامل الدسم",grams:100}
+ ];
+ for(const a of aliases){
+   if(matches.some(m=>m.f[0]===a.name)) continue;
+   for(const term of a.terms){
+    let idx=text.indexOf(term); if(idx<0)continue;
+    let before=text.slice(Math.max(0,idx-35),idx), nums=[...before.matchAll(/(\d+(?:\.\d+)?)/g)], grams=a.grams;
+    if(nums.length){let last=nums[nums.length-1],tail=before.slice(last.index+last[0].length),unit=tail.match(/(كجم|كيلو(?:جرام)?|kg|جم|جرام|غرام|g)\s*$/i);if(unit){grams=+last[0];if(/^(كجم|كيلو|كيلوجرام|kg)$/i.test(unit[1]))grams*=1000;}else if(!tail.trim())grams=+last[0];}
+    const f=DB.find(x=>x[0]===a.name);if(f)matches.push({f,grams:Math.max(1,grams),idx});break;
+   }
+ }
+ // Deduplicate same detected food at the same position and sort in text order.
+ const seen=new Set();matches=matches.filter(m=>{let k=m.f[0]+"@"+m.idx;if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>a.idx-b.idx);
+ return matches;
+}
+async function checkAIStatus(){
+ const el=document.getElementById("aiStatus");
+ try{const r=await fetch("/api/health");if(!r.ok)throw new Error();const d=await r.json();el.innerHTML=d.aiConfigured?'<span style="color:var(--green)">● الذكاء الاصطناعي متصل وجاهز</span>':'<span style="color:var(--orange)">● الخادم يعمل، لكن مفتاح API غير مضبوط</span>';}
+ catch{el.innerHTML='<span style="color:var(--orange)">● غير متصل بالخادم الذكي — شغّل حزمة الخادم المرفقة</span>';}
+}
+document.getElementById("textMealForm").onsubmit=async e=>{
+ e.preventDefault();
+ const raw=document.getElementById("mealText").value.trim(), box=document.getElementById("parseResult");
+ if(!raw)return;
+ box.innerHTML='<div class="notice">جاري تحليل الوجبة بالذكاء الاصطناعي…</div>';
+ try{
+   const response=await fetch("/api/analyze-meal",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mealText:raw,mealType:document.getElementById("textMealType").value})});
+   const data=await response.json();
+   if(!response.ok)throw new Error(data.error||"تعذر تحليل الوجبة");
+   const items=(data.items||[]).map(m=>({name:m.name,grams:+m.grams||100,cal:+m.calories||0,p:+m.protein_g||0,c:+m.carbs_g||0,f:+m.fat_g||0,type:document.getElementById("textMealType").value,assumption:m.assumption||""}));
+   if(!items.length)throw new Error("لم يتم العثور على عناصر واضحة في الوجبة");
+   const total=items.reduce((a,m)=>({cal:a.cal+m.cal,p:a.p+m.p,c:a.c+m.c,f:a.f+m.f}),{cal:0,p:0,c:0,f:0});
+   window.pendingTextMeal=items;
+   box.innerHTML='<div class="notice">راجع التقديرات قبل الحفظ. مستوى الثقة: '+esc(data.confidence||"متوسط")+'. '+esc(data.note||"")+'</div>'+items.map(m=>`<div class="itemrow"><div><strong>${esc(m.name)} — ${m.grams} جم</strong><small>بروتين ${Math.round(m.p)}g • كارب ${Math.round(m.c)}g • دهون ${Math.round(m.f)}g${m.assumption?' • '+esc(m.assumption):''}</small></div><b>${Math.round(m.cal)} سعرة</b></div>`).join("")+`<div style="padding:12px 0"><b>الإجمالي: ${Math.round(total.cal)} سعرة</b><div class="hint">بروتين ${Math.round(total.p)} جم • كارب ${Math.round(total.c)} جم • دهون ${Math.round(total.f)} جم</div></div><button type="button" onclick="saveParsedMeal()">حفظ الوجبة</button> <button type="button" class="secondary" onclick="document.getElementById('parseResult').innerHTML='';window.pendingTextMeal=null">إلغاء</button>`;
+ }catch(err){
+   box.innerHTML='<div class="notice" style="border-color:#704c2c;background:#2a2119;color:#fed7aa">لم ينجح الاتصال بالذكاء الاصطناعي: '+esc(err.message)+'. تأكد أن الخادم يعمل وأن مفتاح API مضبوط. لم نستخدم تخمينًا بديلًا بصمت.</div>';
+ }
+};
+function saveParsedMeal(){if(!window.pendingTextMeal?.length)return;saveMeals([...dayMeals(),...window.pendingTextMeal]);window.pendingTextMeal=null;document.getElementById("mealText").value="";document.getElementById("parseResult").innerHTML='<div class="notice">تم حفظ الوجبة في سجل اليوم.</div>';renderAll();}
+
+function renderAll(){renderHome();renderMeals();renderWeights();document.getElementById("targetInput").value=settings.cal;document.getElementById("proteinTarget").value=settings.p;document.getElementById("carbTarget").value=settings.c;document.getElementById("fatTarget").value=settings.f;document.getElementById("reminderTime").value=get("reminder","07:30")}
+renderAll();renderFoods();checkAIStatus();setInterval(checkReminder,20000);
+</script>
+</body></html>
